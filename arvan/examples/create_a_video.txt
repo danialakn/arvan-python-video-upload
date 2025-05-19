@@ -1,0 +1,52 @@
+"""
+مراحل آپلود کردن در پلتفرم ویدیو  آروان کلود به شرح زیر است:
+
+ابتدا باید یک حساب کاربری داشته باشید
+
+در حساب کاربری خود کانال مربوطه را بسازیر. در این ماژول ما فقط یک کانال برای ویدیو های خود داریم
+ولی شما میتوانید چندین کانال داشته باشید و برای ایجاد کانال های جدید از طریق api یا به صورت دستی در پنل خود اقدام کنید
+
+قبل از استفاده حتما مستندات api اروان را مطالعه کنید چون ممکن هست endpoint ها تغییر کند
+
+شمایل آپلود شدن یک ویدیو در آروان:
+یک کانال ساخته میشود
+با متود پست یک درخواست برای ایجاد فایل جدید فرستاده میشود و در هدرهای جواب این درخواست یک url که محل ذخیره موقت فایل می باشد
+برای شما فرستاده میشود
+در مرحله بعد باید با استفاده از کتابخانه tuspy فایل را با متود patch ارسال کنیم
+بعد از پایان اپلود فایل یک ایدی به این فایل موقت تعلق میگیرد
+از این ایدی در مراحل بعدی استفاده خواهیم کرد
+در صورت نیاز watermark و زیر نویس ایجاد کنید( یااز طریف api یا دستی)
+در مرحله بعد در یک متود پست فایل از قسمت قایل های موقت به قسمت ویدیوها (همراه یا زیرنویس و watermark ) منقل میشود.
+"""
+
+
+import os
+import base64
+import requests
+import re
+from tusclient import client
+from channel import get_channel_id
+"""
+if you want to use watermark
+"""
+from watermark import get_watermark_id
+
+from arvan.file import save_as_video
+
+your_file_id = upload_video_to_arvan(api_key='your apikey', video_path= '/home/user/.../video.mp4', channel_title='channel test')
+save_as_video(api_key='your apikey' ,
+              channel_title='channel test',
+              file_id =your_file_id,
+            watermark_area="FIX_TOP_LEFT")
+# now its finish. you can go to your profile and see the video stream
+#---------------------------------------------------------------------------------------------------------------------------------------------
+#if you upload the file in other ways and now you just want to move it from temp file to video file in Arvan you should do this steps:
+save_as_video(api_key='your apikey' ,
+              channel_title='channel test',
+              file_name='video.mp4',
+              watermark_area="FIX_TOP_LEFT")
+#------------------------------------------------------------------------------------------------------------------------------------
+
+hope this is usefull
+
+danial akhavan
