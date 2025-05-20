@@ -26,12 +26,13 @@ import requests
 import re
 from tusclient import client
 from channel import get_channel_id
+from file import upload_video_to_arvan ,save_as_video
 """
 if you want to use watermark
 """
 from watermark import get_watermark_id
 
-from arvan.file import save_as_video
+from arvan.file import save_as_video 
 
 your_file_id = upload_video_to_arvan(api_key='your apikey', video_path= '/home/user/.../video.mp4', channel_title='channel test')
 save_as_video(api_key='your apikey' ,
